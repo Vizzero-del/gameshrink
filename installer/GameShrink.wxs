@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+  <Package
+    Name="GameShrink"
+    Manufacturer="Vizzero-del"
+    Version="0.1.0"
+    UpgradeCode="{7C8E2EE2-6C1D-4B28-9D7C-BA5EF6B92D4A}">
+
+    <MajorUpgrade DowngradeErrorMessage="A newer version of GameShrink is already installed." />
+
+    <Property Id="MSIINSTALLPERUSER" Value="0" />
+
+    <MediaTemplate EmbedCab="yes" />
+
+    <Feature Id="MainFeature" Title="GameShrink" Level="1">
+      <ComponentGroupRef Id="GameShrinkFiles" />
+      <ComponentRef Id="GameShrinkShortcut" />
+      <ComponentRef Id="DesktopShortcut" />
+      <ComponentRef Id="NativeSqliteDll" />
+    </Feature>
+
+    <StandardDirectory Id="ProgramFiles64Folder">
+      <Directory Id="INSTALLDIR" Name="GameShrink">
+        <Directory Id="RuntimeNativeDir" Name="runtimes">
+          <Directory Id="RuntimeWin64Dir" Name="win-x64">
+            <Directory Id="RuntimeNativeSubdir" Name="native">
+              <Component Id="NativeSqliteDll" Guid="{D5B1D1F3-BA36-4D8C-A9C4-0A0B2D3E0DA0}">
+                <File Id="ESqlite3Root" Source="$(SourceDir)\GameShrink\GameShrink.App\bin\Release\net8.0-windows\runtimes\win-x64\native\e_sqlite3.dll" KeyPath="yes" />
+              </Component>
+            </Directory>
+          </Directory>
+        </Directory>
+      </Directory>
+    </StandardDirectory>
+
+    <StandardDirectory Id="ProgramMenuFolder">
+      <Directory Id="ApplicationProgramsFolder" Name="GameShrink">
+        <Component Id="GameShrinkShortcut" Guid="{B0B12E5A-6B58-4A03-9F64-6B1AD31D7E63}">
+          <Shortcut Id="ApplicationStartMenuShortcut"
+                    Name="GameShrink"
+                    Description="GameShrink"
+                    Target="[INSTALLDIR]GameShrink.exe"
+                    WorkingDirectory="INSTALLDIR" />
+          <Shortcut Id="ApplicationUninstallShortcut"
+                    Name="Uninstall GameShrink"
+                    Description="Uninstall GameShrink"
+                    Target="[SystemFolder]msiexec.exe"
+                    Arguments="/x [ProductCode]"
+                    WorkingDirectory="SystemFolder" />
+          <RemoveFolder Id="ApplicationProgramsFolder" On="uninstall" />
+          <RegistryValue Root="HKLM" Key="Software\Vizzero-del\GameShrink" Name="installed" Type="integer" Value="1" KeyPath="yes" />
+          <RegistryValue Root="HKLM" Key="Software\Microsoft\Windows\CurrentVersion\Uninstall\GameShrink" Name="DisplayName" Type="string" Value="GameShrink" />
+          <RegistryValue Root="HKLM" Key="Software\Microsoft\Windows\CurrentVersion\Uninstall\GameShrink" Name="Publisher" Type="string" Value="Vizzero-del" />
+          <RegistryValue Root="HKLM" Key="Software\Microsoft\Windows\CurrentVersion\Uninstall\GameShrink" Name="DisplayVersion" Type="string" Value="0.1.0" />
+        </Component>
+      </Directory>
+    </StandardDirectory>
+
+    <StandardDirectory Id="DesktopFolder">
+      <Component Id="DesktopShortcut" Guid="{BD9D1E9D-88CE-4F5F-8A1D-7D88B5D3A2A9}">
+        <Shortcut Id="DesktopShortcutLink"
+                  Name="GameShrink"
+                  Description="GameShrink"
+                  Target="[INSTALLDIR]GameShrink.exe"
+                  WorkingDirectory="INSTALLDIR" />
+        <RegistryValue Root="HKLM" Key="Software\Vizzero-del\GameShrink" Name="desktop" Type="integer" Value="1" KeyPath="yes" />
+      </Component>
+    </StandardDirectory>
+
+    <ComponentGroup Id="GameShrinkFiles" Directory="INSTALLDIR">
+      <Files Include="$(SourceDir)\GameShrink\GameShrink.App\bin\Release\net8.0-windows\*" />
+    </ComponentGroup>
+
+  </Package>
+</Wix>

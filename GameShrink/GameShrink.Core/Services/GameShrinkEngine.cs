@@ -67,7 +67,7 @@ public sealed class GameShrinkEngine
             }
 
             op.FinishedAt = DateTime.UtcNow;
-            op.AfterBytes = TryGetDirectorySize(folder);
+            op.AfterBytes = TryGetDirectorySizeOnDisk(folder);
             await _journal.UpdateAsync(op, ct).ConfigureAwait(false);
             return op;
         }
@@ -75,7 +75,7 @@ public sealed class GameShrinkEngine
         {
             op.Status = OperationStatus.Cancelled;
             op.FinishedAt = DateTime.UtcNow;
-            op.AfterBytes = TryGetDirectorySize(folder);
+            op.AfterBytes = TryGetDirectorySizeOnDisk(folder);
             await _journal.UpdateAsync(op, CancellationToken.None).ConfigureAwait(false);
             throw;
         }
@@ -85,7 +85,7 @@ public sealed class GameShrinkEngine
             op.Status = OperationStatus.Failed;
             op.ErrorMessage = ex.Message;
             op.FinishedAt = DateTime.UtcNow;
-            op.AfterBytes = TryGetDirectorySize(folder);
+            op.AfterBytes = TryGetDirectorySizeOnDisk(folder);
             await _journal.UpdateAsync(op, CancellationToken.None).ConfigureAwait(false);
             throw;
         }
@@ -132,7 +132,7 @@ public sealed class GameShrinkEngine
             }
 
             op.FinishedAt = DateTime.UtcNow;
-            op.AfterBytes = TryGetDirectorySize(folder);
+            op.AfterBytes = TryGetDirectorySizeOnDisk(folder);
             await _journal.UpdateAsync(op, ct).ConfigureAwait(false);
             return op;
         }
@@ -140,7 +140,7 @@ public sealed class GameShrinkEngine
         {
             op.Status = OperationStatus.Cancelled;
             op.FinishedAt = DateTime.UtcNow;
-            op.AfterBytes = TryGetDirectorySize(folder);
+            op.AfterBytes = TryGetDirectorySizeOnDisk(folder);
             await _journal.UpdateAsync(op, CancellationToken.None).ConfigureAwait(false);
             throw;
         }
@@ -150,21 +150,40 @@ public sealed class GameShrinkEngine
             op.Status = OperationStatus.Failed;
             op.ErrorMessage = ex.Message;
             op.FinishedAt = DateTime.UtcNow;
-            op.AfterBytes = TryGetDirectorySize(folder);
+            op.AfterBytes = TryGetDirectorySizeOnDisk(folder);
             await _journal.UpdateAsync(op, CancellationToken.None).ConfigureAwait(false);
             throw;
         }
     }
 
-    private static long TryGetDirectorySize(string folder)
+    private static long TryGetDirectorySizeOnDisk(string folder)
     {
         try
         {
             long total = 0;
+
+            _ = DiskSize.TryGetClusterSizeBytes(folder, out var clusterSizeBytes);
+
             foreach (var f in Directory.EnumerateFiles(folder, "*", SearchOption.AllDirectories))
             {
-                try { total += new FileInfo(f).Length; } catch { /* ignore */ }
+                try
+                {
+                    var onDisk = DiskSize.GetFileSizeOnDisk(f);
+                    if (onDisk <= 0)
+                    {
+                        long logical = 0;
+                        try { logical = new FileInfo(f).Length; } catch { /* ignore */ }
+                        onDisk = DiskSize.RoundUpToCluster(logical, clusterSizeBytes);
+                    }
+
+                    total += onDisk;
+                }
+                catch
+                {
+                    // ignore
+                }
             }
+
             return total;
         }
         catch

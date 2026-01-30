@@ -52,13 +52,27 @@ public sealed class FileScanner : IFileScanner
             EnumerateFilesSafe(rootPath, options, allFiles, cancellationToken);
         }, cancellationToken).ConfigureAwait(false);
 
+        // Estimate/measure sizes. TotalBytes is logical size; TotalDiskBytes is "size on disk".
         long totalBytes = 0;
+        long totalDiskBytes = 0;
+
+        // Cluster size helps give a deterministic fallback when Win32 allocation queries fail.
+        _ = DiskSize.TryGetClusterSizeBytes(rootPath, out var clusterSizeBytes);
+
         foreach (var f in allFiles)
         {
             try
             {
                 var fi = new FileInfo(f);
                 totalBytes += fi.Length;
+
+                var onDisk = DiskSize.GetFileSizeOnDisk(f);
+                if (onDisk <= 0)
+                {
+                    onDisk = DiskSize.RoundUpToCluster(fi.Length, clusterSizeBytes);
+                }
+
+                totalDiskBytes += onDisk;
             }
             catch { /* ignore */ }
         }
@@ -81,6 +95,21 @@ public sealed class FileScanner : IFileScanner
             {
                 _log.Warning(ex, "Failed to stat file {File}", file);
                 continue;
+            }
+
+            // Best-effort on-disk size (allocated bytes).
+            long sizeOnDisk;
+            try
+            {
+                sizeOnDisk = DiskSize.GetFileSizeOnDisk(file);
+                if (sizeOnDisk <= 0)
+                {
+                    sizeOnDisk = DiskSize.RoundUpToCluster(fi.Length, clusterSizeBytes);
+                }
+            }
+            catch
+            {
+                sizeOnDisk = DiskSize.RoundUpToCluster(fi.Length, clusterSizeBytes);
             }
 
             processedFiles++;
@@ -107,6 +136,7 @@ public sealed class FileScanner : IFileScanner
                     Path = file,
                     RelativePath = rel,
                     Size = fi.Length,
+                    SizeOnDisk = sizeOnDisk,
                     LastModified = fi.LastWriteTimeUtc,
                     IsCompressible = false,
                     SkipReason = $"Excluded extension: {ext}",
@@ -154,6 +184,7 @@ public sealed class FileScanner : IFileScanner
                 Path = file,
                 RelativePath = rel,
                 Size = fi.Length,
+                SizeOnDisk = sizeOnDisk,
                 LastModified = fi.LastWriteTimeUtc,
                 IsCompressed = isCompressed,
                 EstimatedCompressionRatio = estRatio,
@@ -167,7 +198,11 @@ public sealed class FileScanner : IFileScanner
         result.Files = files;
         result.FileCount = files.Count;
         result.TotalSize = files.Sum(f => f.Size);
+        result.TotalSizeOnDisk = totalDiskBytes > 0 ? totalDiskBytes : files.Sum(f => f.SizeOnDisk);
         result.CompressedFileCount = files.Count(f => f.IsCompressed);
+
+        // NOTE: EstimatedSavings is best-effort and is based on logical sizes.
+        // UI will also surface "size on disk" which matches Explorer/actual allocation.
         result.EstimatedSavings = files.Where(f => f.IsCompressible).Sum(f => f.EstimatedSavings);
         result.AverageCompressionRatio = files.Count > 0 ? files.Average(f => f.EstimatedCompressionRatio <= 0 ? 1.0 : f.EstimatedCompressionRatio) : 1.0;
 

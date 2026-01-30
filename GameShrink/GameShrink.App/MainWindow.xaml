@@ -173,14 +173,14 @@
             <UniformGrid Columns="4" Margin="0,0,0,16">
               <md:Card Style="{StaticResource AppCard}" Margin="0,0,12,0">
                 <StackPanel>
-                  <TextBlock Style="{StaticResource AppHelperText}" Text="Total size" />
+                  <TextBlock Style="{StaticResource AppHelperText}" Text="Total size (logical)" />
                   <TextBlock FontSize="18" FontWeight="SemiBold" Text="{Binding AnalysisTotalSizeText}" />
                 </StackPanel>
               </md:Card>
               <md:Card Style="{StaticResource AppCard}" Margin="0,0,12,0">
                 <StackPanel>
-                  <TextBlock Style="{StaticResource AppHelperText}" Text="File count" />
-                  <TextBlock FontSize="18" FontWeight="SemiBold" Text="{Binding AnalysisFileCountText}" />
+                  <TextBlock Style="{StaticResource AppHelperText}" Text="Size on disk" />
+                  <TextBlock FontSize="18" FontWeight="SemiBold" Text="{Binding AnalysisTotalSizeOnDiskText}" />
                 </StackPanel>
               </md:Card>
               <md:Card Style="{StaticResource AppCard}" Margin="0,0,12,0">

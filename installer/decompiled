@@ -1,0 +1,270 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+  <Package Codepage="65001" Manufacturer="Vizzero-del" ProductCode="{376B4295-68E7-4486-8EA4-EEB427745182}" Language="0" Name="GameShrink" Version="0.1.0" UpgradeCode="{7C8E2EE2-6C1D-4B28-9D7C-BA5EF6B92D4A}">
+    <StandardDirectory Id="ProgramFilesFolder">
+      <Directory Id="INSTALLDIR" ShortName="kxpaulzm" Name="GameShrink">
+        <Directory Id="dJ2.KQL2aST_oDIWA4GSfFAwbHm8" ShortName="wbitjtal" Name="linux-arm">
+          <Directory Id="d6dScsSCpy1WdfPn5jpN.NjwBxrU" Name="native">
+            <Component Id="fls5EMTvpGBDZzVuh7ikcFL136.B.U" Guid="{80188E44-19EA-516C-987D-9A7621901E82}" Bitness="always32">
+              <File Id="fls5EMTvpGBDZzVuh7ikcFL136.B.U" ShortName="us8a4e01.so" Name="libe_sqlite3.so" KeyPath="yes" Source="SourceDir\File\fls5EMTvpGBDZzVuh7ikcFL136.B.U" />
+            </Component>
+          </Directory>
+        </Directory>
+        <Directory Id="dDATamA7vAUOCnGjGr9aVkDJ1HOY" ShortName="ze5-hv-f" Name="linux-arm64">
+          <Directory Id="d3Yxu7w_Z6l9JWsxRL_TWu12ikEY" Name="native">
+            <Component Id="flsBpwsYLUlwMSZBw9bRHz38BXLuo0" Guid="{1DB0A889-0066-5A2A-9CC8-5B2DC9D413B4}" Bitness="always32">
+              <File Id="flsBpwsYLUlwMSZBw9bRHz38BXLuo0" ShortName="isowtbhk.so" Name="libe_sqlite3.so" KeyPath="yes" Source="SourceDir\File\flsBpwsYLUlwMSZBw9bRHz38BXLuo0" />
+            </Component>
+          </Directory>
+        </Directory>
+        <Directory Id="dKl0xs2OHdMs5LbBH35KFdNG26s4" ShortName="ypdck93k" Name="linux-armel">
+          <Directory Id="dN.itKHYbrMYR4yMksV967lRXm50" Name="native">
+            <Component Id="flsgUfQbh38jmTY_oLOpRnkcy9EbmM" Guid="{609A04B1-D843-56F4-ACDE-505CC3CD721C}" Bitness="always32">
+              <File Id="flsgUfQbh38jmTY_oLOpRnkcy9EbmM" ShortName="i5zsh2i3.so" Name="libe_sqlite3.so" KeyPath="yes" Source="SourceDir\File\flsgUfQbh38jmTY_oLOpRnkcy9EbmM" />
+            </Component>
+          </Directory>
+        </Directory>
+        <Directory Id="dv.1MkhP9EXUMKdSz46bHoUR9XvQ" ShortName="sd6mxpnz" Name="linux-mips64">
+          <Directory Id="d.E2zhIhD0nE7ktOekg0_yMCXJkw" Name="native">
+            <Component Id="flstA9itjUK8TI5uN4Iejx4AtoSnl4" Guid="{A32EDDCA-034A-57EB-9A46-FFA502CE826A}" Bitness="always32">
+              <File Id="flstA9itjUK8TI5uN4Iejx4AtoSnl4" ShortName="3zjxsvcw.so" Name="libe_sqlite3.so" KeyPath="yes" Source="SourceDir\File\flstA9itjUK8TI5uN4Iejx4AtoSnl4" />
+            </Component>
+          </Directory>
+        </Directory>
+        <Directory Id="duofOd6IzFIf5hVkDCM8TrG3K3ao" ShortName="md2tbg3p" Name="linux-musl-arm">
+          <Directory Id="d65R9adjxFSojVMqcSjIxcOrw8wE" Name="native">
+            <Component Id="flsdFOToxIKH6cFQSZ1sY8EoR5xO3A" Guid="{B93240EE-E774-54DB-B630-F2AEFB76960F}" Bitness="always32">
+              <File Id="flsdFOToxIKH6cFQSZ1sY8EoR5xO3A" ShortName="ebq9zkrw.so" Name="libe_sqlite3.so" KeyPath="yes" Source="SourceDir\File\flsdFOToxIKH6cFQSZ1sY8EoR5xO3A" />
+            </Component>
+          </Directory>
+        </Directory>
+        <Directory Id="dHIOArH5YhG0jL0CTgAYDKnuQ4PY" ShortName="wni_dfby" Name="linux-musl-arm64">
+          <Directory Id="dcj60JaddrRo08tGo9IMdbQQkpZM" Name="native">
+            <Component Id="fls4PGkQZdQgSv2tH.ZpsGNZ8pPcFY" Guid="{2641EBB3-D6AF-5828-8D3C-9ED46F11FE44}" Bitness="always32">
+              <File Id="fls4PGkQZdQgSv2tH.ZpsGNZ8pPcFY" ShortName="ku3ipxqj.so" Name="libe_sqlite3.so" KeyPath="yes" Source="SourceDir\File\fls4PGkQZdQgSv2tH.ZpsGNZ8pPcFY" />
+            </Component>
+          </Directory>
+        </Directory>
+        <Directory Id="d2UrfQSPFeDB31Hu7eRN0lfqrZWQ" ShortName="qyzm1h3l" Name="linux-musl-s390x">
+          <Directory Id="do_.IIqMM7QsqOo0zN2uQjn6VuN0" Name="native">
+            <Component Id="flsanl1htNVXQLCzS4qkyDROqnNrDc" Guid="{D7B12894-00D1-5A35-8D3F-3D807E191514}" Bitness="always32">
+              <File Id="flsanl1htNVXQLCzS4qkyDROqnNrDc" ShortName="beidclz9.so" Name="libe_sqlite3.so" KeyPath="yes" Source="SourceDir\File\flsanl1htNVXQLCzS4qkyDROqnNrDc" />
+            </Component>
+          </Directory>
+        </Directory>
+        <Directory Id="dVq0nW7iW2UFcv3.xaGJgEyh29m8" ShortName="tnsftkks" Name="linux-musl-x64">
+          <Directory Id="dcHEGN0ITdlHNHbL_bDP6l7sdiCw" Name="native">
+            <Component Id="flsLyZ4JTLhDqZYqiiBRfHWxQyTYn4" Guid="{2817FFC1-CD9D-527E-A147-E7FFCBEEBC69}" Bitness="always32">
+              <File Id="flsLyZ4JTLhDqZYqiiBRfHWxQyTYn4" ShortName="j3gfghyh.so" Name="libe_sqlite3.so" KeyPath="yes" Source="SourceDir\File\flsLyZ4JTLhDqZYqiiBRfHWxQyTYn4" />
+            </Component>
+          </Directory>
+        </Directory>
+        <Directory Id="do7H_aA.FVvG8sJ1G9rdJb96BEU4" ShortName="1orv9f6o" Name="linux-ppc64le">
+          <Directory Id="dsdz5pPyoeoRlV5N_N6KfRBUjDYs" Name="native">
+            <Component Id="flsEQrmXmXBNGEtHi.6hg7T82y3WlE" Guid="{FFDE9C6E-56CD-5D00-80F1-6E2E2DB6C82E}" Bitness="always32">
+              <File Id="flsEQrmXmXBNGEtHi.6hg7T82y3WlE" ShortName="5tpgnayx.so" Name="libe_sqlite3.so" KeyPath="yes" Source="SourceDir\File\flsEQrmXmXBNGEtHi.6hg7T82y3WlE" />
+            </Component>
+          </Directory>
+        </Directory>
+        <Directory Id="dgUT.FBcWQ.U4k..U4XEsUDME3xo" ShortName="jihh8qkb" Name="linux-s390x">
+          <Directory Id="dFk0Iv2wm0EooDuorLm428EVj1.U" Name="native">
+            <Component Id="flsulJwvGA3m6swK7Nt6yQXp_9_esA" Guid="{1F9BB513-C73A-514A-8075-92D2A961D5FD}" Bitness="always32">
+              <File Id="flsulJwvGA3m6swK7Nt6yQXp_9_esA" ShortName="mz4l4n8m.so" Name="libe_sqlite3.so" KeyPath="yes" Source="SourceDir\File\flsulJwvGA3m6swK7Nt6yQXp_9_esA" />
+            </Component>
+          </Directory>
+        </Directory>
+        <Directory Id="dneDt689sej7ibWtMc0BDx8ocFKM" ShortName="d_srzn5h" Name="linux-x64">
+          <Directory Id="d4vLNQR7lrdxW4wwFTAQbYWZ7ntU" Name="native">
+            <Component Id="flsFu9frGDGnOaxa4M6RbVT.xHnhn4" Guid="{2AA46C87-E582-53B1-9285-64104D6201D3}" Bitness="always32">
+              <File Id="flsFu9frGDGnOaxa4M6RbVT.xHnhn4" ShortName="mbw6vxnf.so" Name="libe_sqlite3.so" KeyPath="yes" Source="SourceDir\File\flsFu9frGDGnOaxa4M6RbVT.xHnhn4" />
+            </Component>
+          </Directory>
+        </Directory>
+        <Directory Id="dRKU3WcVxUU55f9wcM.ws1Z2vxPI" ShortName="ciuymhyh" Name="linux-x86">
+          <Directory Id="dbuBXtpQCZJ_5wrreDiDDwTCbyJo" Name="native">
+            <Component Id="flspxgpNJFZQJ3lseo5f1WDL7rQg1w" Guid="{AD5C2AD3-A20F-56B7-8672-493C930E417F}" Bitness="always32">
+              <File Id="flspxgpNJFZQJ3lseo5f1WDL7rQg1w" ShortName="srqpnihg.so" Name="libe_sqlite3.so" KeyPath="yes" Source="SourceDir\File\flspxgpNJFZQJ3lseo5f1WDL7rQg1w" />
+            </Component>
+          </Directory>
+        </Directory>
+        <Directory Id="dp1wR9ZiCXK5ijuBGwL.I93Pzcwo" ShortName="qhoqt-4q" Name="maccatalyst-arm64">
+          <Directory Id="dGDwFLRYi20SYkCxZ8jCauIpc5P0" Name="native">
+            <Component Id="flsQqX_BFHtpfPFGYhzBCVyJKDMfxU" Guid="{EDD60FCB-3392-5DA8-924E-3C3A9345C826}" Bitness="always32">
+              <File Id="flsQqX_BFHtpfPFGYhzBCVyJKDMfxU" ShortName="c1uwwske.dyl" Name="libe_sqlite3.dylib" KeyPath="yes" Source="SourceDir\File\flsQqX_BFHtpfPFGYhzBCVyJKDMfxU" />
+            </Component>
+          </Directory>
+        </Directory>
+        <Directory Id="d8ht4lCVcSZDNNRFElXsqcJwmjhM" ShortName="ytlbpgnf" Name="maccatalyst-x64">
+          <Directory Id="dj0acxOcFDKV7o7hubdLioRQFhE8" Name="native">
+            <Component Id="flstshCeEzSB5OoS12HmnLPyHVX55w" Guid="{5F7B145B-3177-58FF-B956-31DACE4D4267}" Bitness="always32">
+              <File Id="flstshCeEzSB5OoS12HmnLPyHVX55w" ShortName="u24p1hur.dyl" Name="libe_sqlite3.dylib" KeyPath="yes" Source="SourceDir\File\flstshCeEzSB5OoS12HmnLPyHVX55w" />
+            </Component>
+          </Directory>
+        </Directory>
+        <Directory Id="dd0S_76_NR8a5J0pRnom4mJ_DIY8" ShortName="6kkcwgjy" Name="osx-arm64">
+          <Directory Id="dbC619pqtrS.uSTHLPoZ1Fr8Ieb8" Name="native">
+            <Component Id="flsW1ZmN3Xbo9E4V17M7itqvG7rb0k" Guid="{7F9F9D80-A143-55A8-8EF9-5BE02FA98861}" Bitness="always32">
+              <File Id="flsW1ZmN3Xbo9E4V17M7itqvG7rb0k" ShortName="_x7uzxwr.dyl" Name="libe_sqlite3.dylib" KeyPath="yes" Source="SourceDir\File\flsW1ZmN3Xbo9E4V17M7itqvG7rb0k" />
+            </Component>
+          </Directory>
+        </Directory>
+        <Directory Id="d0H84OLjKB8bFwfOi8v_uZpw13GU" Name="osx-x64">
+          <Directory Id="dQWy2C_87cxkf9vJ8uJ4ZHXIh02M" Name="native">
+            <Component Id="flsj.833LLingNYKJWfVBgIbZBFVDE" Guid="{4F41A8F1-F468-569C-B9F9-1C25125B2EE6}" Bitness="always32">
+              <File Id="flsj.833LLingNYKJWfVBgIbZBFVDE" ShortName="acyzouug.dyl" Name="libe_sqlite3.dylib" KeyPath="yes" Source="SourceDir\File\flsj.833LLingNYKJWfVBgIbZBFVDE" />
+            </Component>
+          </Directory>
+        </Directory>
+        <Directory Id="df2vQ1_TqeHgP98g_GzjZjpszYJE" Name="win-arm">
+          <Directory Id="d0mvIzGZyK03gGoV4JotZ9oiTIeU" Name="native">
+            <Component Id="fls_dr22YxdHQTj1dZn1CbS13DQC9I" Guid="{08D1EAB1-DF79-57A2-AAA7-3FADFE1B4093}" Bitness="always32">
+              <File Id="fls_dr22YxdHQTj1dZn1CbS13DQC9I" ShortName="bazvk03q.dll" Name="e_sqlite3.dll" KeyPath="yes" Source="SourceDir\File\fls_dr22YxdHQTj1dZn1CbS13DQC9I" />
+            </Component>
+          </Directory>
+        </Directory>
+        <Directory Id="dVMoGJ9D_pojJzMo4JScD.mpa68Y" ShortName="enek7fjt" Name="win-arm64">
+          <Directory Id="dG25O4naO6g1qCpOwoueUWUZElKU" Name="native">
+            <Component Id="flsOVHQ8L_7WdsLF11Q01dCiXF0VKo" Guid="{C5573667-857E-5E4D-B627-5A734511EB13}" Bitness="always32">
+              <File Id="flsOVHQ8L_7WdsLF11Q01dCiXF0VKo" ShortName="nwawjrky.dll" Name="e_sqlite3.dll" KeyPath="yes" Source="SourceDir\File\flsOVHQ8L_7WdsLF11Q01dCiXF0VKo" />
+            </Component>
+          </Directory>
+        </Directory>
+        <Directory Id="dqML9F7JU5DUaTuI360bypxeI74U" Name="win-x64">
+          <Directory Id="dToO4AtTBPpqK3TIksG.hSK5TXJQ" Name="native">
+            <Component Id="fls7tXEUBOVAt3qep8ip1nRS.HrHjY" Guid="{9D745F60-9B0B-5277-BBC7-EBD4F8D03173}" Bitness="always32">
+              <File Id="fls7tXEUBOVAt3qep8ip1nRS.HrHjY" ShortName="ikpexgrq.dll" Name="e_sqlite3.dll" KeyPath="yes" Source="SourceDir\File\fls7tXEUBOVAt3qep8ip1nRS.HrHjY" />
+            </Component>
+          </Directory>
+        </Directory>
+        <Directory Id="dXI6G7gHnFKWdlAK47p.OU174iEI" Name="win-x86">
+          <Directory Id="daECQRZ..mZ4vtci_yJk0I2crAT0" Name="native">
+            <Component Id="flsboTwY_Gj.Hyx4epvU75DNe.LbZ4" Guid="{95A39D2C-9958-54F6-9899-3EB8F4ABC740}" Bitness="always32">
+              <File Id="flsboTwY_Gj.Hyx4epvU75DNe.LbZ4" ShortName="lrxoavaj.dll" Name="e_sqlite3.dll" KeyPath="yes" Source="SourceDir\File\flsboTwY_Gj.Hyx4epvU75DNe.LbZ4" />
+            </Component>
+          </Directory>
+        </Directory>
+        <Directory Id="dDvvHMO6VM_xHLLTALR8RbfMYdxs" ShortName="fkm6pend" Name="browser-wasm">
+          <Directory Id="dbzoUgEKKMJA3XogUAMvtkRn6uc8" ShortName="by8zezhd" Name="nativeassets">
+            <Directory Id="d2tv2uX6A24_tPFzfttYJkgRPS58" Name="net8.0">
+              <Component Id="flsx8C3wAoXlBjN71ok1hsJGFD6tPI" Guid="{EC721227-2042-5EB2-B6B8-07DF1C95B724}" Bitness="always32">
+                <File Id="flsx8C3wAoXlBjN71ok1hsJGFD6tPI" ShortName="ll7bqli3.a" Name="e_sqlite3.a" KeyPath="yes" Source="SourceDir\File\flsx8C3wAoXlBjN71ok1hsJGFD6tPI" />
+              </Component>
+            </Directory>
+          </Directory>
+        </Directory>
+        <Component Id="flslRV0.SG_iKJaOCA2VVhdmEktHas" Guid="{B81166F3-6729-5282-A574-56B9AA57C52A}" Bitness="always32">
+          <File Id="flslRV0.SG_iKJaOCA2VVhdmEktHas" ShortName="kdfetq-u.dll" Name="GameShrink.Core.dll" KeyPath="yes" Source="SourceDir\File\flslRV0.SG_iKJaOCA2VVhdmEktHas" />
+        </Component>
+        <Component Id="flsiuF72viYCvaPK7t7283AZhpUy2k" Guid="{389868F4-46C1-5211-9653-71BF06C62D92}" Bitness="always32">
+          <File Id="flsiuF72viYCvaPK7t7283AZhpUy2k" ShortName="bugysay2.pdb" Name="GameShrink.Core.pdb" KeyPath="yes" Source="SourceDir\File\flsiuF72viYCvaPK7t7283AZhpUy2k" />
+        </Component>
+        <Component Id="flsLWvS8VCccWhwfzGhzG5ZUUl4d1Y" Guid="{74D26287-86DA-5F1B-92BA-B26B69A9080D}" Bitness="always32">
+          <File Id="flsLWvS8VCccWhwfzGhzG5ZUUl4d1Y" ShortName="wps_ar1x.jso" Name="GameShrink.deps.json" KeyPath="yes" Source="SourceDir\File\flsLWvS8VCccWhwfzGhzG5ZUUl4d1Y" />
+        </Component>
+        <Component Id="flscld1EbihRCMIlzxAPPTpqQdVx0A" Guid="{225AB74B-D8A6-5589-8E45-1963960F2885}" Bitness="always32">
+          <File Id="flscld1EbihRCMIlzxAPPTpqQdVx0A" ShortName="r8xjs8dz.dll" Name="GameShrink.dll" KeyPath="yes" Source="SourceDir\File\flscld1EbihRCMIlzxAPPTpqQdVx0A" />
+        </Component>
+        <Component Id="flsJXUA3HWPvuSRRlyWHj3FETs6BJQ" Guid="{EE045346-2174-5251-B773-BC3AE9179FD3}" Bitness="always32">
+          <File Id="flsJXUA3HWPvuSRRlyWHj3FETs6BJQ" ShortName="uknkuffm.exe" Name="GameShrink.exe" KeyPath="yes" Source="SourceDir\File\flsJXUA3HWPvuSRRlyWHj3FETs6BJQ" />
+        </Component>
+        <Component Id="fls2j2_1mk6.v_1F58epol.fFnodJg" Guid="{2F85764F-8BF0-5C28-B8DF-97940F72E8BB}" Bitness="always32">
+          <File Id="fls2j2_1mk6.v_1F58epol.fFnodJg" ShortName="mj9-i5xg.pdb" Name="GameShrink.pdb" KeyPath="yes" Source="SourceDir\File\fls2j2_1mk6.v_1F58epol.fFnodJg" />
+        </Component>
+        <Component Id="flsoj6C2Axy73Os8.ikq9ArQU0kF5M" Guid="{724F5C10-C67A-5396-B096-3DDA5057DAB6}" Bitness="always32">
+          <File Id="flsoj6C2Axy73Os8.ikq9ArQU0kF5M" ShortName="xtft3k2s.jso" Name="GameShrink.runtimeconfig.json" KeyPath="yes" Source="SourceDir\File\flsoj6C2Axy73Os8.ikq9ArQU0kF5M" />
+        </Component>
+        <Component Id="flsnkaRB7g1gjiG1sAnaAI13WWOowg" Guid="{9713E95F-CEF1-5632-BE8B-446FD4D5E935}" Bitness="always32">
+          <File Id="flsnkaRB7g1gjiG1sAnaAI13WWOowg" ShortName="zc-u8vey.dll" Name="MaterialDesignColors.dll" KeyPath="yes" Source="SourceDir\File\flsnkaRB7g1gjiG1sAnaAI13WWOowg" />
+        </Component>
+        <Component Id="flsk0r1Sub4zftD1sdz574QXtNpPSw" Guid="{9044D7C3-ADCF-52E9-8740-9886754B877E}" Bitness="always32">
+          <File Id="flsk0r1Sub4zftD1sdz574QXtNpPSw" ShortName="rmuzsv_p.dll" Name="MaterialDesignThemes.Wpf.dll" KeyPath="yes" Source="SourceDir\File\flsk0r1Sub4zftD1sdz574QXtNpPSw" />
+        </Component>
+        <Component Id="flsvwGFgawJGHqmahnur.65lqwhuqs" Guid="{92B2F3EB-2390-5F93-B080-5E181FDD1DA8}" Bitness="always32">
+          <File Id="flsvwGFgawJGHqmahnur.65lqwhuqs" ShortName="si4cgs3d.dll" Name="Microsoft.Data.Sqlite.dll" KeyPath="yes" Source="SourceDir\File\flsvwGFgawJGHqmahnur.65lqwhuqs" />
+        </Component>
+        <Component Id="flsFUTrm.DxajvvbR7EaJeAQ9QwkPU" Guid="{F726CCE8-C32C-5314-A9A2-2B9A94C779C0}" Bitness="always32">
+          <File Id="flsFUTrm.DxajvvbR7EaJeAQ9QwkPU" ShortName="iwa8qlar.dll" Name="Microsoft.Xaml.Behaviors.dll" KeyPath="yes" Source="SourceDir\File\flsFUTrm.DxajvvbR7EaJeAQ9QwkPU" />
+        </Component>
+        <Component Id="flsRdcSog8qvnmeKuMFn1dngh2I2AQ" Guid="{BD187A5D-199E-5782-920B-DE5F1C0E6600}" Bitness="always32">
+          <File Id="flsRdcSog8qvnmeKuMFn1dngh2I2AQ" Name="Serilog.dll" KeyPath="yes" Source="SourceDir\File\flsRdcSog8qvnmeKuMFn1dngh2I2AQ" />
+        </Component>
+        <Component Id="flshrw5FF1hATa.9ST03g1bQX8tq7M" Guid="{1D389E74-3611-5285-A651-B103DC121205}" Bitness="always32">
+          <File Id="flshrw5FF1hATa.9ST03g1bQX8tq7M" ShortName="tgjy_0aw.dll" Name="Serilog.Sinks.Console.dll" KeyPath="yes" Source="SourceDir\File\flshrw5FF1hATa.9ST03g1bQX8tq7M" />
+        </Component>
+        <Component Id="flsLs7F_XKZ9jnDbcjjT2Jmp_PmmRs" Guid="{90A95A57-E72F-52EB-AEB8-BB615E13B2CD}" Bitness="always32">
+          <File Id="flsLs7F_XKZ9jnDbcjjT2Jmp_PmmRs" ShortName="l8ualfuh.dll" Name="Serilog.Sinks.File.dll" KeyPath="yes" Source="SourceDir\File\flsLs7F_XKZ9jnDbcjjT2Jmp_PmmRs" />
+        </Component>
+        <Component Id="flsWfS2zlRPLpjyv1hIIgr2NZ3nVjI" Guid="{B0336FC4-D059-56D4-A806-77D1915E9387}" Bitness="always32">
+          <File Id="flsWfS2zlRPLpjyv1hIIgr2NZ3nVjI" ShortName="lxv8iprb.dll" Name="SQLitePCLRaw.batteries_v2.dll" KeyPath="yes" Source="SourceDir\File\flsWfS2zlRPLpjyv1hIIgr2NZ3nVjI" />
+        </Component>
+        <Component Id="flsWoclqZqqqA5iIW.CeYy7hVM_DTs" Guid="{77702A64-39D5-5D79-BB69-5EDFB327FE83}" Bitness="always32">
+          <File Id="flsWoclqZqqqA5iIW.CeYy7hVM_DTs" ShortName="b9qfwv4i.dll" Name="SQLitePCLRaw.core.dll" KeyPath="yes" Source="SourceDir\File\flsWoclqZqqqA5iIW.CeYy7hVM_DTs" />
+        </Component>
+        <Component Id="flselNNwLZ.FprL3abcTIZIPGH9eKA" Guid="{1816424F-C4A0-5AA2-AA9E-3F331AAAEB7D}" Bitness="always32">
+          <File Id="flselNNwLZ.FprL3abcTIZIPGH9eKA" ShortName="qfyj4x6s.dll" Name="SQLitePCLRaw.provider.e_sqlite3.dll" KeyPath="yes" Source="SourceDir\File\flselNNwLZ.FprL3abcTIZIPGH9eKA" />
+        </Component>
+      </Directory>
+    </StandardDirectory>
+    <StandardDirectory Id="ProgramMenuFolder">
+      <Directory Id="ApplicationProgramsFolder" ShortName="jao72gu_" Name="GameShrink">
+        <Component Id="GameShrinkShortcut" Guid="{B0B12E5A-6B58-4A03-9F64-6B1AD31D7E63}" Bitness="always32">
+          <Shortcut Id="ApplicationStartMenuShortcut" Directory="ApplicationProgramsFolder" Description="GameShrink" WorkingDirectory="INSTALLDIR" ShortName="sdrc0gzc" Name="GameShrink" Target="[INSTALLDIR]GameShrink.exe" />
+          <Shortcut Id="ApplicationUninstallShortcut" Directory="ApplicationProgramsFolder" Arguments="/x [ProductCode]" Description="Uninstall GameShrink" WorkingDirectory="SystemFolder" ShortName="w6_190sh" Name="Uninstall GameShrink" Target="[SystemFolder]msiexec.exe" />
+          <RemoveFolder Id="ApplicationProgramsFolder" On="uninstall" Directory="ApplicationProgramsFolder" />
+          <RegistryValue Id="regDXPqteOtCwJYcm2k6P2sXXw78TQ" Key="Software\Vizzero-del\GameShrink" Name="installed" Root="HKCU" Type="integer" Value="1" KeyPath="yes" />
+        </Component>
+      </Directory>
+    </StandardDirectory>
+    <StandardDirectory Id="SystemFolder" />
+    <StandardDirectory Id="DesktopFolder">
+      <Component Id="DesktopShortcut" Guid="{BD9D1E9D-88CE-4F5F-8A1D-7D88B5D3A2A9}" Bitness="always32">
+        <Shortcut Id="DesktopShortcutLink" Directory="DesktopFolder" Description="GameShrink" WorkingDirectory="INSTALLDIR" ShortName="j8xetipg" Name="GameShrink" Target="[INSTALLDIR]GameShrink.exe" />
+        <RegistryValue Id="regLDlTLKAEnUtTbdFk.uk2LK1SZgw" Key="Software\Vizzero-del\GameShrink" Name="desktop" Root="HKCU" Type="integer" Value="1" KeyPath="yes" />
+      </Component>
+    </StandardDirectory>
+    <Feature Id="MainFeature" Title="GameShrink" Level="1">
+      <ComponentRef Id="GameShrinkShortcut" />
+      <ComponentRef Id="DesktopShortcut" />
+      <ComponentRef Id="flslRV0.SG_iKJaOCA2VVhdmEktHas" />
+      <ComponentRef Id="flsiuF72viYCvaPK7t7283AZhpUy2k" />
+      <ComponentRef Id="flsLWvS8VCccWhwfzGhzG5ZUUl4d1Y" />
+      <ComponentRef Id="flscld1EbihRCMIlzxAPPTpqQdVx0A" />
+      <ComponentRef Id="flsJXUA3HWPvuSRRlyWHj3FETs6BJQ" />
+      <ComponentRef Id="fls2j2_1mk6.v_1F58epol.fFnodJg" />
+      <ComponentRef Id="flsoj6C2Axy73Os8.ikq9ArQU0kF5M" />
+      <ComponentRef Id="flsnkaRB7g1gjiG1sAnaAI13WWOowg" />
+      <ComponentRef Id="flsk0r1Sub4zftD1sdz574QXtNpPSw" />
+      <ComponentRef Id="flsvwGFgawJGHqmahnur.65lqwhuqs" />
+      <ComponentRef Id="flsFUTrm.DxajvvbR7EaJeAQ9QwkPU" />
+      <ComponentRef Id="flsRdcSog8qvnmeKuMFn1dngh2I2AQ" />
+      <ComponentRef Id="flshrw5FF1hATa.9ST03g1bQX8tq7M" />
+      <ComponentRef Id="flsLs7F_XKZ9jnDbcjjT2Jmp_PmmRs" />
+      <ComponentRef Id="flsWfS2zlRPLpjyv1hIIgr2NZ3nVjI" />
+      <ComponentRef Id="flsWoclqZqqqA5iIW.CeYy7hVM_DTs" />
+      <ComponentRef Id="flselNNwLZ.FprL3abcTIZIPGH9eKA" />
+      <ComponentRef Id="fls5EMTvpGBDZzVuh7ikcFL136.B.U" />
+      <ComponentRef Id="flsBpwsYLUlwMSZBw9bRHz38BXLuo0" />
+      <ComponentRef Id="flsgUfQbh38jmTY_oLOpRnkcy9EbmM" />
+      <ComponentRef Id="flstA9itjUK8TI5uN4Iejx4AtoSnl4" />
+      <ComponentRef Id="flsdFOToxIKH6cFQSZ1sY8EoR5xO3A" />
+      <ComponentRef Id="fls4PGkQZdQgSv2tH.ZpsGNZ8pPcFY" />
+      <ComponentRef Id="flsanl1htNVXQLCzS4qkyDROqnNrDc" />
+      <ComponentRef Id="flsLyZ4JTLhDqZYqiiBRfHWxQyTYn4" />
+      <ComponentRef Id="flsEQrmXmXBNGEtHi.6hg7T82y3WlE" />
+      <ComponentRef Id="flsulJwvGA3m6swK7Nt6yQXp_9_esA" />
+      <ComponentRef Id="flsFu9frGDGnOaxa4M6RbVT.xHnhn4" />
+      <ComponentRef Id="flspxgpNJFZQJ3lseo5f1WDL7rQg1w" />
+      <ComponentRef Id="flsQqX_BFHtpfPFGYhzBCVyJKDMfxU" />
+      <ComponentRef Id="flstshCeEzSB5OoS12HmnLPyHVX55w" />
+      <ComponentRef Id="flsW1ZmN3Xbo9E4V17M7itqvG7rb0k" />
+      <ComponentRef Id="flsj.833LLingNYKJWfVBgIbZBFVDE" />
+      <ComponentRef Id="fls_dr22YxdHQTj1dZn1CbS13DQC9I" />
+      <ComponentRef Id="flsOVHQ8L_7WdsLF11Q01dCiXF0VKo" />
+      <ComponentRef Id="fls7tXEUBOVAt3qep8ip1nRS.HrHjY" />
+      <ComponentRef Id="flsboTwY_Gj.Hyx4epvU75DNe.LbZ4" />
+      <ComponentRef Id="flsx8C3wAoXlBjN71ok1hsJGFD6tPI" />
+    </Feature>
+    <Media Id="1" EmbedCab="yes" Cabinet="cab1.cab" />
+    <MajorUpgrade DowngradeErrorMessage="A newer version of GameShrink is already installed." />
+  </Package>
+</Wix>

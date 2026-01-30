@@ -107,6 +107,7 @@ public sealed class MainViewModel : ObservableObject
     public string AppDataText => $"Data: {App.AppDataDir}";
 
     public string AnalysisTotalSizeText => _analysis is null ? "-" : Formatters.Bytes(_analysis.TotalSize);
+    public string AnalysisTotalSizeOnDiskText => _analysis is null ? "-" : Formatters.Bytes(_analysis.TotalSizeOnDisk);
     public string AnalysisFileCountText => _analysis is null ? "-" : _analysis.FileCount.ToString("N0");
     public string AnalysisEstimatedSavingsText => _analysis is null ? "-" : Formatters.Bytes(_analysis.EstimatedSavings);
 
@@ -329,6 +330,7 @@ public sealed class MainViewModel : ObservableObject
             _analysis = res;
 
             RaisePropertyChanged(nameof(AnalysisTotalSizeText));
+            RaisePropertyChanged(nameof(AnalysisTotalSizeOnDiskText));
             RaisePropertyChanged(nameof(AnalysisFileCountText));
             RaisePropertyChanged(nameof(AnalysisEstimatedSavingsText));
             RaisePropertyChanged(nameof(AnalysisVolumeText));
@@ -440,7 +442,7 @@ public sealed class MainViewModel : ObservableObject
                 mode,
                 algo,
                 runOpt,
-                _analysis.TotalSize,
+                _analysis.TotalSizeOnDisk,
                 prog,
                 _runCts.Token).ConfigureAwait(true);
 
@@ -532,7 +534,7 @@ public sealed class MainViewModel : ObservableObject
                     : $"Rollback in progress…{Environment.NewLine}{current}";
             });
 
-            var before = _analysis?.TotalSize ?? 0;
+            var before = _analysis?.TotalSizeOnDisk ?? 0;
 
             var op = await _engine.RollbackAsync(
                 SelectedFolder,
@@ -628,8 +630,8 @@ public sealed class MainViewModel : ObservableObject
                $"Status: {op.Status}" + Environment.NewLine +
                $"Folder: {op.Path}" + Environment.NewLine +
                $"Mode/Algorithm: {op.Mode} / {op.Algorithm}" + Environment.NewLine +
-               $"Before: {Formatters.Bytes(op.BeforeBytes)}" + Environment.NewLine +
-               $"After: {Formatters.Bytes(op.AfterBytes)}" + Environment.NewLine +
+               $"Before (size on disk): {Formatters.Bytes(op.BeforeBytes)}" + Environment.NewLine +
+               $"After (size on disk): {Formatters.Bytes(op.AfterBytes)}" + Environment.NewLine +
                $"Recovered/Saved (approx): {Formatters.Bytes(delta)}" + Environment.NewLine +
                $"Duration: {duration}" + (string.IsNullOrWhiteSpace(op.ErrorMessage) ? "" : Environment.NewLine + "Error: " + op.ErrorMessage);
     }

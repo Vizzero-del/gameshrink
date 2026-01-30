@@ -4,7 +4,16 @@ public class FileAnalysisInfo
 {
     public string Path { get; set; } = string.Empty;
     public string RelativePath { get; set; } = string.Empty;
+
+    /// <summary>Logical size (uncompressed bytes).</summary>
     public long Size { get; set; }
+
+    /// <summary>
+    /// On-disk allocated bytes ("size on disk").
+    /// This is what actually matters for free space.
+    /// </summary>
+    public long SizeOnDisk { get; set; }
+
     public DateTime LastModified { get; set; }
     public bool IsCompressed { get; set; }
     public long CompressedSize { get; set; }
@@ -33,7 +42,13 @@ public enum FileTypeCategory
 public class FolderAnalysisResult
 {
     public string Path { get; set; } = string.Empty;
+
+    /// <summary>Logical bytes (sum of file lengths).</summary>
     public long TotalSize { get; set; }
+
+    /// <summary>Allocated bytes ("size on disk").</summary>
+    public long TotalSizeOnDisk { get; set; }
+
     public long TotalCompressedSize { get; set; }
     public int FileCount { get; set; }
     public int CompressedFileCount { get; set; }
