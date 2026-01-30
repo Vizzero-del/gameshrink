@@ -3,7 +3,7 @@
   <Package
     Name="GameShrink"
     Manufacturer="Vizzero-del"
-    Version="0.1.1"
+    Version="0.1.2"
     UpgradeCode="{7C8E2EE2-6C1D-4B28-9D7C-BA5EF6B92D4A}">
 
     <MajorUpgrade DowngradeErrorMessage="A newer version of GameShrink is already installed." />
@@ -51,7 +51,7 @@
           <RegistryValue Root="HKLM" Key="Software\Vizzero-del\GameShrink" Name="installed" Type="integer" Value="1" KeyPath="yes" />
           <RegistryValue Root="HKLM" Key="Software\Microsoft\Windows\CurrentVersion\Uninstall\GameShrink" Name="DisplayName" Type="string" Value="GameShrink" />
           <RegistryValue Root="HKLM" Key="Software\Microsoft\Windows\CurrentVersion\Uninstall\GameShrink" Name="Publisher" Type="string" Value="Vizzero-del" />
-          <RegistryValue Root="HKLM" Key="Software\Microsoft\Windows\CurrentVersion\Uninstall\GameShrink" Name="DisplayVersion" Type="string" Value="0.1.1" />
+          <RegistryValue Root="HKLM" Key="Software\Microsoft\Windows\CurrentVersion\Uninstall\GameShrink" Name="DisplayVersion" Type="string" Value="0.1.2" />
         </Component>
       </Directory>
     </StandardDirectory>
