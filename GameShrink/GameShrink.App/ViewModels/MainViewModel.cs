@@ -1,6 +1,8 @@
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
+using System.Media;
 using System.Threading;
 using System.Windows;
 using GameShrink.Core.Abstractions;
@@ -408,7 +410,14 @@ public sealed class MainViewModel : ObservableObject
 
         // For large game folders, verbose compact output can be extremely large and make the app appear “stuck”.
         // We run compact in quiet mode and rely on a heartbeat progress update from the runner.
-        var runOpt = new CompactRunOptions { Quiet = true };
+        // To still provide an ETA, we pass a best-effort total + assumed throughput.
+        var assumedBps = await EstimateThroughputBytesPerSecAsync(algo, _runCts.Token).ConfigureAwait(true);
+        var runOpt = new CompactRunOptions
+        {
+            Quiet = true,
+            ApproxTotalBytes = _analysis.TotalSizeOnDisk,
+            AssumedThroughputBytesPerSec = assumedBps
+        };
 
         IsBusy = true;
         ProgressPercent = 0;
@@ -450,6 +459,8 @@ public sealed class MainViewModel : ObservableObject
             StatusText = "Done";
             ProgressStatusText = "Finished";
 
+            try { SystemSounds.Asterisk.Play(); } catch { /* ignore */ }
+
             // Post-scan to refresh estimates/flags
             await AnalyzeAsync().ConfigureAwait(true);
         }
@@ -457,12 +468,14 @@ public sealed class MainViewModel : ObservableObject
         {
             StatusText = "Compression cancelled";
             ProgressStatusText = "Cancelled";
+            try { SystemSounds.Exclamation.Play(); } catch { /* ignore */ }
         }
         catch (Exception ex)
         {
             _log.Error(ex, "Compression failed");
             StatusText = "Compression failed";
             ProgressStatusText = "Failed";
+            try { SystemSounds.Hand.Play(); } catch { /* ignore */ }
             System.Windows.MessageBox.Show(ex.Message, "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
         }
         finally
@@ -521,6 +534,9 @@ public sealed class MainViewModel : ObservableObject
 
         try
         {
+            var before = _analysis?.TotalSizeOnDisk ?? 0;
+            var assumedBps = await EstimateThroughputBytesPerSecAsync(CompressionAlgorithm.None, _runCts.Token).ConfigureAwait(true);
+
             var prog = new Progress<CompressionProgress>(p =>
             {
                 var current = string.IsNullOrWhiteSpace(p.CurrentFile) ? "" : $"Current: {p.CurrentFile}";
@@ -534,12 +550,15 @@ public sealed class MainViewModel : ObservableObject
                     : $"Rollback in progress…{Environment.NewLine}{current}";
             });
 
-            var before = _analysis?.TotalSizeOnDisk ?? 0;
-
             var op = await _engine.RollbackAsync(
                 SelectedFolder,
                 originalOperationId: null,
-                options: new CompactRunOptions { Quiet = false },
+                options: new CompactRunOptions
+                {
+                    Quiet = true,
+                    ApproxTotalBytes = before,
+                    AssumedThroughputBytesPerSec = assumedBps
+                },
                 beforeBytes: before,
                 progress: prog,
                 ct: _runCts.Token).ConfigureAwait(true);
@@ -554,18 +573,22 @@ public sealed class MainViewModel : ObservableObject
             StatusText = "Rollback finished";
             ProgressStatusText = "Finished";
 
+            try { SystemSounds.Asterisk.Play(); } catch { /* ignore */ }
+
             await AnalyzeAsync().ConfigureAwait(true);
         }
         catch (OperationCanceledException)
         {
             StatusText = "Rollback cancelled";
             ProgressStatusText = "Cancelled";
+            try { SystemSounds.Exclamation.Play(); } catch { /* ignore */ }
         }
         catch (Exception ex)
         {
             _log.Error(ex, "Rollback failed");
             StatusText = "Rollback failed";
             ProgressStatusText = "Failed";
+            try { SystemSounds.Hand.Play(); } catch { /* ignore */ }
             System.Windows.MessageBox.Show(ex.Message, "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
         }
         finally
@@ -638,4 +661,53 @@ public sealed class MainViewModel : ObservableObject
 
     private static IEnumerable<string> SplitLines(string s)
         => s.Split(new[] { "\r\n", "\n" }, StringSplitOptions.RemoveEmptyEntries);
+
+    private async Task<double> EstimateThroughputBytesPerSecAsync(CompressionAlgorithm algorithm, CancellationToken ct)
+    {
+        try
+        {
+            // Best-effort: compute a throughput estimate from recent completed operations.
+            // We store BeforeBytes as size-on-disk now, which is what we want for ETA.
+            var recent = await _journal.GetRecentAsync(40, ct).ConfigureAwait(false);
+
+            var candidates = recent
+                .Where(r => !r.IsRollback)
+                .Where(r => r.Status == OperationStatus.Completed)
+                .Where(r => r.BeforeBytes > 0)
+                .Where(r => r.FinishedAt is not null)
+                .Select(r => new
+                {
+                    Algo = r.Algorithm,
+                    Bps = r.BeforeBytes / Math.Max(1.0, (r.FinishedAt!.Value - r.StartedAt).TotalSeconds)
+                })
+                .Where(x => x.Bps > 1024 * 1024) // ignore absurdly low/invalid
+                .ToList();
+
+            // Prefer same algorithm samples first.
+            var picked = candidates.Where(x => x.Algo == algorithm).Select(x => x.Bps).ToList();
+            if (picked.Count < 3)
+            {
+                picked = candidates.Select(x => x.Bps).ToList();
+            }
+
+            if (picked.Count > 0)
+            {
+                picked.Sort();
+                var median = picked[picked.Count / 2];
+                return median;
+            }
+        }
+        catch
+        {
+            // ignore
+        }
+
+        // Fallback heuristics (very approximate, but better than nothing).
+        return algorithm switch
+        {
+            CompressionAlgorithm.Lzx => 15d * 1024 * 1024,
+            CompressionAlgorithm.NTFS => 30d * 1024 * 1024,
+            _ => 25d * 1024 * 1024
+        };
+    }
 }

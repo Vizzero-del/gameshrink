@@ -49,6 +49,18 @@ public sealed class CompactRunOptions
     /// then later resuming by re-running compact on the directory.
     /// </summary>
     public bool PauseByCancellingProcess { get; set; } = true;
+
+    /// <summary>
+    /// Optional: a best-effort expected total bytes for the operation (typically folder "size on disk").
+    /// Used only for approximate progress/ETA when compact.exe runs in quiet mode.
+    /// </summary>
+    public long ApproxTotalBytes { get; set; } = 0;
+
+    /// <summary>
+    /// Optional: assumed throughput (bytes/sec) to compute an ETA when compact.exe provides no progress.
+    /// Suggested source: previous operation history on this machine.
+    /// </summary>
+    public double AssumedThroughputBytesPerSec { get; set; } = 0;
 }
 
 public sealed class CompactRunResult

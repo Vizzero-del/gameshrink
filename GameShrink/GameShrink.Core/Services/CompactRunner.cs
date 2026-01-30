@@ -24,7 +24,7 @@ public sealed class CompactRunner : ICompactRunner
     {
         var algoArg = algorithm.ToCompactArgument();
         var args = BuildArgs("/C", directory, options, algoArg);
-        return RunAsync(directory, args, progress, cancellationToken);
+        return RunAsync(directory, args, options, progress, cancellationToken);
     }
 
     public Task<CompactRunResult> UncompressAsync(
@@ -34,7 +34,7 @@ public sealed class CompactRunner : ICompactRunner
         CancellationToken cancellationToken)
     {
         var args = BuildArgs("/U", directory, options, extra: null);
-        return RunAsync(directory, args, progress, cancellationToken);
+        return RunAsync(directory, args, options, progress, cancellationToken);
     }
 
     public Task<CompactQueryResult> QueryAsync(string directory, CancellationToken cancellationToken)
@@ -62,6 +62,7 @@ public sealed class CompactRunner : ICompactRunner
     private async Task<CompactRunResult> RunAsync(
         string directory,
         string arguments,
+        CompactRunOptions options,
         IProgress<CompressionProgress>? progress,
         CancellationToken cancellationToken)
     {
@@ -145,18 +146,44 @@ public sealed class CompactRunner : ICompactRunner
             });
 
             // Heartbeat: update status with elapsed time even if compact prints nothing.
+            // If caller provides an assumed throughput, we can also show approximate progress + ETA.
+            var approxTotalBytes = options.ApproxTotalBytes;
+            var assumedBps = options.AssumedThroughputBytesPerSec;
+
             heartbeatTask = Task.Run(async () =>
             {
                 try
                 {
                     while (!p.HasExited && !cancellationToken.IsCancellationRequested)
                     {
+                        var elapsed = sw.Elapsed;
+
+                        long processedBytesApprox = 0;
+                        TimeSpan? eta = null;
+                        double speedMBps = 0;
+
+                        if (approxTotalBytes > 0 && assumedBps > 0)
+                        {
+                            processedBytesApprox = (long)Math.Min(approxTotalBytes, assumedBps * Math.Max(0, elapsed.TotalSeconds));
+                            var remainingBytes = Math.Max(0, approxTotalBytes - processedBytesApprox);
+                            eta = TimeSpan.FromSeconds(remainingBytes / assumedBps);
+                            speedMBps = assumedBps / (1024d * 1024d);
+                        }
+
+                        var status = eta is null
+                            ? $"Running compact.exe… Elapsed {elapsed:hh\\:mm\\:ss}"
+                            : $"Running compact.exe… Elapsed {elapsed:hh\\:mm\\:ss} • ETA {eta:hh\\:mm\\:ss}";
+
                         progress?.Report(new CompressionProgress
                         {
                             CurrentFile = currentFile,
                             ProcessedFiles = (int)Math.Min(int.MaxValue, processedFiles),
                             TotalFiles = 0,
-                            StatusMessage = $"Running compact.exe… Elapsed {sw.Elapsed:hh\\:mm\\:ss}"
+                            ProcessedBytes = processedBytesApprox,
+                            TotalBytes = approxTotalBytes,
+                            SpeedMBps = speedMBps,
+                            EstimatedTimeRemaining = eta,
+                            StatusMessage = status
                         });
 
                         await Task.Delay(TimeSpan.FromSeconds(1)).ConfigureAwait(false);
